@@ -33,7 +33,7 @@
   <div class="form-group row">
     <label for="text" class="col-4 col-form-label">Harga</label> 
     <div class="col-8">
-      <input id="text" name="text" type="text" class="form-control">
+      <input id="Harga" name="Harga" type="text" class="form-control">
     </div>
   </div>
   <div class="form-group row">
@@ -45,7 +45,7 @@
   <div class="form-group row">
     <label for="TglAuditTerakhir" class="col-4 col-form-label">Tgl. Audit Terakhir</label> 
     <div class="col-8">
-      <input id="TglAuditTerakhir" name="TglAuditTerakhir" type="text" class="form-control">
+      <input id="TglAuditTerakhir" name="TglAuditTerakhir" type="date" class="form-control" value="<?php echo date('Y-m-d');?>">
     </div>
   </div> 
   <div class="form-group row">
@@ -54,3 +54,30 @@
     </div>
   </div>
 </form>
+<?php 
+  if (isset($_POST['submit'])) {
+    $KodeBarang=filter_var($_POST['KodeBarang'],FILTER_SANITIZE_STRING);
+    $NamaBarang=filter_var($_POST['NamaBarang'],FILTER_SANITIZE_STRING);
+    $JumlahStok=filter_var($_POST['JumlahStok'],FILTER_SANITIZE_STRING);
+    $Harga=filter_var($_POST['Harga'],FILTER_SANITIZE_STRING);
+    $Satuan=filter_var($_POST['Satuan'],FILTER_SANITIZE_STRING);
+    $TglAuditTerakhir=filter_var($_POST['TglAuditTerakhir'],FILTER_SANITIZE_STRING);
+    include('koneksi.db.php');
+    $sql="INSERT INTO `barang`(`KodeBarang`, `NamaBarang`, `JumlahStok`, `Harga`, `Satuan`, `TglAuditTerakhir`) VALUES ('".$KodeBarang."','".$NamaBarang."','".$JumlahStok."','".$Harga."','".$Satuan."','".$TglAuditTerakhir."')";
+    $q=mysqli_query($koneksi,$sql);
+    if ($q) {
+      echo '<div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>Success!</strong> Rekord sukses disimpan !.
+    </div>';
+    } else {
+      echo '<div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>Gagal!</strong> Rekord gagal disimpan !.
+    </div>';
+    }
+  }
+  ?>
+</div>
+</body>
+</html>

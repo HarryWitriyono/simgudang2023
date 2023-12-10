@@ -11,7 +11,7 @@
   
 <div class="container">
   <h1>Form Gudang</h1>
-<form method="post">
+  <form method="post">
   <div class="form-group row">
     <label for="KodeGudang" class="col-4 col-form-label">Kode Gudang</label> 
     <div class="col-8">
@@ -29,4 +29,27 @@
       <button name="submit" type="submit" class="btn btn-primary">Simpan Gudang Baru</button>
     </div>
   </div>
-</form>
+  </form>
+  <?php 
+  if (isset($_POST['submit'])) {
+    $KodeGudang=filter_var($_POST['KodeGudang'],FILTER_SANITIZE_STRING);
+    $Alamat=filter_var($_POST['Alamat'],FILTER_SANITIZE_STRING);
+    include('koneksi.db.php');
+    $sql="INSERT INTO `gudang`(`KodeGudang`, `Alamat`) VALUES ('".$KodeGudang."','".$Alamat."')";
+    $q=mysqli_query($koneksi,$sql);
+    if ($q) {
+      echo '<div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>Success!</strong> Rekord sukses disimpan !.
+    </div>';
+    } else {
+      echo '<div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>Gagal!</strong> Rekord gagal disimpan !.
+    </div>';
+    }
+  }
+  ?>
+</div>
+</body>
+</html>
