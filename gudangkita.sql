@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 11:34 AM
+-- Generation Time: Dec 10, 2023 at 01:04 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.14
 
@@ -63,6 +63,20 @@ CREATE TABLE `gudang` (
   `Alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengguna`
+--
+
+CREATE TABLE `pengguna` (
+  `KodeLogin` varchar(30) NOT NULL,
+  `Password` varchar(30) NOT NULL,
+  `NamaPengguna` varchar(50) NOT NULL,
+  `Alamat` text DEFAULT NULL,
+  `waktudaftar` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -88,6 +102,12 @@ ALTER TABLE `gudang`
   ADD PRIMARY KEY (`KodeGudang`);
 
 --
+-- Indexes for table `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`KodeLogin`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -101,7 +121,7 @@ ALTER TABLE `barangdigudang`
 -- AUTO_INCREMENT for table `gudang`
 --
 ALTER TABLE `gudang`
-  MODIFY `KodeGudang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `KodeGudang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
